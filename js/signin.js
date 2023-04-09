@@ -35,6 +35,7 @@ const init = () => {
 
         if (isSuccess) {
             alert('로그인 성공!');
+            location.href='./index.html';
             localStorage.setItem('login', JSON.stringify(idEl.value));
         } else {
             alert('로그인 실패!');
