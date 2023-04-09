@@ -49,6 +49,16 @@ const readTodo = () => {
     });
 };
 
+const updateComplete = (updateId, isChecked) => {
+    const todos = JSON.parse(localStorage.getItem('todos'));
+    const findTodo = todos.find(todo => todo.id === updateId);
+
+    findTodo.complete = isChecked;
+
+    localStorage.setItem('todos', JSON.stringify(todos));
+    readTodo();
+};
+
 // 읽기 전
 const createTodo = () => {
     const todoText = todoInputEl.value;
@@ -77,7 +87,13 @@ const deleteTodo = (deleteId) => {
 
     localStorage.setItem('todos', JSON.stringify(filteredTodos));
     readTodo();
-}
+};
+
+const logout = () => {
+    localStorage.removeItem('login');
+    alert('로그아웃!');
+    location.href = './signin.html';
+};
 
 const init = () => {
     isLogin();
@@ -88,10 +104,8 @@ const init = () => {
     readTodo();
 
     todoButtonEl.addEventListener('click', createTodo);
-    //logoutButtonEl.addEventListener('click', logout);
+    logoutButtonEl.addEventListener('click', logout);
 };
 
 
 document.addEventListener('DOMContentLoaded', init);
-
-
